@@ -1,7 +1,6 @@
 " File: autoload/deoplete/snippy.vim
 " Description: Helper functions for deoplete. Copied from deoplete-snipmate.
 
-
 func! deoplete#snippy#get_completion_item(user_data) abort
     if has_key(a:user_data, 'lspitem')
         " deoplete-lsp
@@ -47,6 +46,6 @@ func! deoplete#snippy#try_expand() abort
 
         let l:word = v:completed_item['word']
 
-        call v:lua.snippy.expand_snippet(l:snippet, l:word)
+        call luaeval('require "snippy".expand_snippet(_A[1], _A[2])', [l:snippet, l:word])
     endif
 endfunc
